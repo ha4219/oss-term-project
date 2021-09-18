@@ -39,4 +39,4 @@
 - ...
 
 ## 📄 License
-This Project is MIT licensed, as found in the [LICENSE][l] file.
+This Project is MIT licensed, as found in the LICENSE file.
