@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Route} from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './components/Home';
+import ProblemList from './components/problem/ProblemList';
+
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Header />
+      <Route exact path="/" component={Home}/>
+      <Route path="/problem/:level" component={ProblemList} />
+    <Footer />
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
