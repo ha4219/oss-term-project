@@ -183,3 +183,14 @@ def getNotSolvedProblemByLevel(level):
     from problem.models import Problem
     return Problem.objects.filter(level=level, solved=False)
 
+
+def refreshProblemStatusByLevel():
+    from problem.models import Problem, ProblemStatusByLevel
+
+    for level in range(31):
+        total = len(Problem.objects.filter(level=level))
+        solved = len(Problem.objects.filter(level=level, solved=True))
+        notSolved = total - solved
+        ProblemStatusByLevel(level=level, total=total, solved=solved, notSolved=notSolved).save()
+
+refreshProblemStatusByLevel()

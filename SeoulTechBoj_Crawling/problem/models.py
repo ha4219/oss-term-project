@@ -14,6 +14,12 @@ class Problem(models.Model):
     tag = models.ManyToManyField('tag.Tag')
 
 
-
 class SolvedProblem(models.Model):
     problemId = models.IntegerField(primary_key=True, unique=True)
+
+
+class ProblemStatusByLevel(models.Model):
+    level = models.IntegerField(primary_key=True, unique=True)
+    total = models.IntegerField()
+    solved = models.IntegerField()
+    notSolved = models.IntegerField()
