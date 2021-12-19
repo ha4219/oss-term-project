@@ -60,9 +60,10 @@ def handleTag(tag):
     if not checkTag(tag):
         try:
             Tag(name=tag).save()
+            return tag
         except:
             print('tag error...')
-    return
+    return None
 
 
 def saveProblem(data):
@@ -70,7 +71,7 @@ def saveProblem(data):
     try:
         Problem.objects.create(problemId=data["problemId"], titleKo=data["titleKo"], isSolvable=data["isSolvable"],
                                acceptedUserCount=data["acceptedUserCount"], level=data["level"],
-                               averageTries=data["averageTries"],
+                               averageTries=data["averageTries"], tags=data['tagss'],
                                solved=False).save()
         # for tag in tags:
         #     print(tag)
@@ -86,9 +87,13 @@ def getProblem(problemId):
 
         data = res.json()
         # handle tag
-        # tags = data["tags"]
-        # for tag in tags:
-        #     handleTag(tag["key"])
+        tags = data["tags"]
+        tagss = []
+        for tag in tags:
+            tmp = handleTag(tag["key"])
+            if tmp:
+                tagss.append(tmp)
+        data['tagss'] = tagss
         saveProblem(data)
         return True
     except:
